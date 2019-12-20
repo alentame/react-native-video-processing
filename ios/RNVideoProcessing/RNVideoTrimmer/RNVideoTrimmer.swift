@@ -220,7 +220,7 @@ class RNVideoTrimmer: NSObject {
       
       let composition = AVMutableComposition()
       do {
-        try composition.insertTimeRange(timeRange, of: asset, at: kCMTimeZero)
+        try composition.insertTimeRange(timeRange, of: asset, at: CMTime.zero)
       } catch {
         callback(["Error inserting time range", NSNull()])
         // Error handling code here
@@ -230,7 +230,7 @@ class RNVideoTrimmer: NSObject {
       var outputURL = documentDirectory.appendingPathComponent("output")
       do {
         try manager.createDirectory(at: outputURL, withIntermediateDirectories: true, attributes: nil)
-        let name = randomString()
+        let name = self.randomString()
         outputURL = outputURL.appendingPathComponent("\(name).mp4")
       } catch {
         callback([error.localizedDescription, NSNull()])
@@ -242,7 +242,7 @@ class RNVideoTrimmer: NSObject {
       
       let finalComposition = composition.copy() as! AVComposition
       
-      let useQuality = getQualityForAsset(quality: quality, asset: asset)
+      let useQuality = self.getQualityForAsset(quality: quality, asset: asset)
       
       print("RNVideoTrimmer passed quality: \(quality). useQuality: \(useQuality)")
       
