@@ -167,8 +167,10 @@ export class App extends Component {
     const { source } = this.props;
     ProcessingManager.getVideoInfo(source)
       .then(({ duration, size, frameRate, bitrate }) => console.log(duration, size, frameRate, bitrate));
-
-    ProcessingManager.trim(source, options) // like VideoPlayer trim options
+    
+    // on iOS it's possible to trim remote files by using remote file as source
+    // options like VideoPlayer trim options
+    ProcessingManager.trim(source, options) 
           .then((data) => console.log(data));
 
     ProcessingManager.compress(source, options) // like VideoPlayer compress options
